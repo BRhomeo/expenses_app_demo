@@ -1,3 +1,4 @@
+import 'package:expenses_app_demo/models/monthly_data.dart';
 import 'package:expenses_app_demo/screens/income_expense_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,11 @@ class MonthlyBreakdownCard extends StatelessWidget {
               'Balance: \$${(monthlyData.income - monthlyData.expenses).toStringAsFixed(2)}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: (monthlyData.income - monthlyData.expenses) >= 0
-                    ? Colors.green
-                    : Colors.red,
+                color: (monthlyData.income - monthlyData.expenses) == 0
+                    ? Colors.grey
+                    : (monthlyData.income - monthlyData.expenses) >= 0
+                        ? Colors.green
+                        : Colors.red,
               ),
             ),
           ],
