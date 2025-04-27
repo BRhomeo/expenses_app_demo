@@ -1,3 +1,4 @@
+import 'package:expenses_app_demo/models/monthly_data.dart';
 import 'package:expenses_app_demo/widgets/form/custom_dropdown_button_form_field.dart';
 import 'package:expenses_app_demo/widgets/form/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,7 @@ class _IncomeExpenseScreenState extends State<IncomeExpenseScreen> {
       double expenses =
           _monthlyExpenses.values.fold(0, (sum, amount) => sum + amount);
 
-      if (_bonusMonth == i + 1) {
+      if (_bonusMonth! <= i + 1) {
         income += _yearlyBonus;
       }
       if (_travelMonth == i + 1) {
@@ -172,6 +173,9 @@ class _IncomeExpenseScreenState extends State<IncomeExpenseScreen> {
                     return 'Please enter your yearly bonus';
                   }
                   return null;
+                },
+                onChanged: (value) {
+                  _yearlyBonus = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(height: 10),
@@ -267,15 +271,6 @@ class _IncomeExpenseScreenState extends State<IncomeExpenseScreen> {
       ),
     );
   }
-}
-
-class MonthlyData {
-  final String month;
-  final double income;
-  final double expenses;
-
-  MonthlyData(
-      {required this.month, required this.income, required this.expenses});
 }
 
 class MonthlyBreakdownScreen extends StatelessWidget {
